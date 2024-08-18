@@ -1,0 +1,8 @@
+target/
+debug/
+**/*.rs.bk
+.pdb
+.devbox/
+/exercises/.rustup
+/slides/slides.html
+/slides/pd-images/
