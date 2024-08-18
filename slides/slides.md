@@ -1,16 +1,108 @@
 ---
-title: Rust & WASM
-author: Chritian Sanabria & Jakob Beckmann
+title: Crab Rave
+author: Selim Kälin & Zak Cook & Jakob Beckmann
 institute: Innovation Process Technology AG
-date: 14.06.2022
+date: 30.08.2024
 progress: false
 hash: true
 controls: false
 highlightjs: true
 ipt-footer: true
 transition: none
-
 ---
+
+# Why Rust?
+
+::: notes
+Session goes from 11:00 to 12:30 (90 minutes), 14:00 to 15:00 (60 minutes) and 15:30 to 16:25 (55
+minutes).
+
+Without counting breaks, we have 205 minutes (3.5 hours).
+:::
+
+# ![](./assets/crab-with-seatbelt.jpeg)
+
+::: notes
+Talk about the invention of the seatbelt, how it was ok to die in a car.
+
+- Invented in 1959 by Volvo
+- Needed laws in the 70s to actually push adoption.
+:::
+
+# A Short Walkthrough
+
+- Add slides about what it offers
+- language basics (functions, control flow)
+- basic project structure (cargo, what files, dependencies, etc)
+
+::: notes
+10-15 minutes max
+:::
+
+# Hands-On: Hello World
+::: notes
+5-10 minutes max
+:::
+
+
+# Ownership
+
+- Add slides on mutability
+- Add slides on ownership and borrowoing
+- Slices
+- Lifetimes
+- Start explaining references
+
+::: notes
+30 minutes
+:::
+
+# Hands-On
+
+Check rustlings content for this
+
+::: notes
+30 minutes
+:::
+
+# Enumerations
+
+# Pattern Matching
+
+# Error Handling
+
+::: notes
+all three topics, 20 minutes
+:::
+
+
+# Hands-On
+
+Check rustlings content for this
+
+::: notes
+20 minutes
+:::
+
+# Traits
+
+# Macros
+
+::: notes
+20 minutes
+:::
+
+
+# Hands-On
+
+Check rustlings content for this
+
+::: notes
+20 minutes
+:::
+
+
+# Stuff from the wasm techbier
 
 # Intro
 
