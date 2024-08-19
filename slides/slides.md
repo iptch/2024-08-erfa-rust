@@ -31,15 +31,85 @@ Talk about the invention of the seatbelt, how it was ok to die in a car.
 
 # A Short Walkthrough
 
-- Add slides about what it offers
-- language basics (functions, control flow)
-- basic project structure (cargo, what files, dependencies, etc)
-
 ::: notes
 10-15 minutes max
 :::
 
+## Features
+
+> Easy, expressive concurrency.
+
+::: notes
+- performance
+- type safety (reliability)
+- simple concurrency
+- expressiveness (productivity)
+:::
+
+## Primitives
+
+- Signed and unsigned integers: `u8`, `i64`, `isize`
+- Floating points: `f32`, `f64`
+- Unicode characters: `'a'`, `'∞'`
+- Booleans: `true`, `false`
+- Unit type: `()`
+
+## Compound Types
+
+- Arrays: `[1, 2, 3]`, `[1; 256]`
+- Tuples: `(1, true)`, `T(1, "hello")`
+
+::: notes
+- arrays are fixed in size
+- tuples can also be named
+:::
+
+## Functions
+
+```rust
+fn print_hello(name: String) {
+    println!("Hello, {}!", name);
+}
+```
+
+::: notes
+- intentionally skip over references and slices, we will come back to it
+- inner is a macro
+  - a code generator run before type checking
+  - more powerful than functions
+  - much more difficult to write
+:::
+
+## Control Flow
+
+```rust
+if name == "selim" {
+    println!("wow");
+} else {
+    println!("Hello, {}!", name);
+}
+```
+
+## Expressions
+```rust
+let last_name = if name == "selim" {
+    // no semi-colon at the end to ensure it is
+    // treated as an expression
+    "kälin"
+} else {
+    "who cares"
+};
+```
+## Project Structure
+
+<!-- TODO -->
+
 # Hands-On: Hello World
+
+- Check out the readme in `exercises`
+- Initialise rustlings
+- Do exercise `00_intro`
+
 ::: notes
 5-10 minutes max
 :::
@@ -47,14 +117,29 @@ Talk about the invention of the seatbelt, how it was ok to die in a car.
 
 # Ownership
 
+## Passing by Value
+
+```rust
+fn print_hello(name: String) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let name = String::from("Jakob");
+    print_hello(name);
+    // can no longer use name
+}
+```
+
+::: notes
+30 minutes
+
 - Add slides on mutability
 - Add slides on ownership and borrowoing
 - Slices
 - Lifetimes
 - Start explaining references
 
-::: notes
-30 minutes
 :::
 
 # Hands-On
