@@ -117,20 +117,6 @@ let last_name = if name == "selim" {
 
 # Ownership
 
-## Passing by Value
-
-```rust
-fn print_hello(name: String) {
-    println!("Hello, {}!", name);
-}
-
-fn main() {
-    let name = String::from("Jakob");
-    print_hello(name);
-    // can no longer use name
-}
-```
-
 ::: notes
 30 minutes
 
@@ -139,8 +125,43 @@ fn main() {
 - Slices
 - Lifetimes
 - Start explaining references
-
 :::
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  fn print_hello(name: String) {
+      println!("Hello, {}!", name);
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  fn print_hello(name: String) {
+      println!("Hello, {}!", name);
+  }
+  
+  fn main() {
+      let name = String::from("Jakob");
+      print_hello(name);
+      // can no longer use name
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  fn print_hello(name: &str) {
+      println!("Hello, {}!", name);
+  }
+  
+  fn main() {
+      let name = String::from("Jakob");
+      print_hello(&name);
+      // can now be used here again
+      print_hello(&name);
+  }
+</code></pre>
+
 
 # Hands-On
 
