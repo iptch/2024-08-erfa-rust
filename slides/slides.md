@@ -3,12 +3,12 @@ title: Crab Rave
 author: Selim Kälin & Zak Cook & Jakob Beckmann
 institute: Innovation Process Technology AG
 date: 30.08.2024
+theme: moon
+revealjs-url: "https://unpkg.com/reveal.js@5.1.0"
 progress: false
-hash: true
 controls: false
+hash: true
 highlightjs: true
-ipt-footer: true
-transition: none
 ---
 
 # Why Rust?
@@ -20,7 +20,7 @@ minutes).
 Without counting breaks, we have 205 minutes (3.5 hours).
 :::
 
-# ![](./assets/crab-with-seatbelt.jpeg)
+# {background="./assets/crab-with-seatbelt.jpeg"}
 
 ::: notes
 Talk about the invention of the seatbelt, how it was ok to die in a car.
