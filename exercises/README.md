@@ -25,3 +25,7 @@ rustlings init
 
 This will download all the rustlings exercises into the directory and make them ready to use for
 you.
+
+After the rustlings exercises have downloaded, you can start them by navigating into the
+`rustlings` directory and entering the command `rustlings`. 
+From there on, the exercise interface will guide you.
