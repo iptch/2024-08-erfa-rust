@@ -175,6 +175,25 @@ Check rustlings content for this
 
 # Enumerations
 
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  // Simple enum 
+  enum Seasons {
+    Winter,
+    Spring,
+    Summer,
+    Autumn,
+  }
+
+  let favorite_season = Seasons::Winter;
+  let mut current_season = Seasons::Summer;
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  // Enums can contain data
+  
+</code></pre>
 # Pattern Matching
 
 # Error Handling
