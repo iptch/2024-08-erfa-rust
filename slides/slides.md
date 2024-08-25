@@ -183,6 +183,7 @@ Check rustlings content for this
     Spring,
     Summer,
     Autumn,
+    Bulk,
   }
 
   let favorite_season = Seasons::Winter;
@@ -192,9 +193,61 @@ Check rustlings content for this
 ## {data-auto-animate=true}
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
   // Enums can contain data
-  
+  enum Contact{
+    Phone(u16, u16, u16, u16),
+    Email(String),
+  }
+
+  let ipt_phone = Contact::Phone(44, 735, 27, 69)
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"))
 </code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  // Enums can implement methods
+  impl Contact{
+    fn contact(&self) {
+      match self {
+        Contact::Phone(a, b, c, d) => println!("dialling {}-{}-{}-{} ...", a, b, c, d),
+        Contact::Email(address) => println!("writing to {} ...", address),
+      }
+    }
+  }
+
+  ipt_phone.contact(); // Output: writing to info@ipt.ch ...
+}
+</code></pre>
+
+## Rust's `Option` Enum 
+```rust
+  enum Option<T> {
+    None,
+    Some(T),
+  }
+
+  let apples: Option<u8> = Some(4);
+  let orange: Option<u8> = None;
+```
+
+## Rust's `Result` Enum 
+```rust
+  enum Result<T, E> {
+    Ok(T),
+    Err(E),
+  }
+```
 # Pattern Matching
+```rust
+  fn real_season(season: Seasons) -> Result<Seasons, String> {
+      match season {
+          Seasons::Winter => Ok(season),
+          Seasons::Spring => Ok(season),
+          Seasons::Summer => Ok(season),
+          Seasons::Autumn => Ok(season),
+          Seasons::Bulk => Err("I am not so sure about that...".to_string()),
+      }
+  }
+```
 
 # Error Handling
 
