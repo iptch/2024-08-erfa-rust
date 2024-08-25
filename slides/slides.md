@@ -29,7 +29,7 @@ Talk about the invention of the seatbelt, how it was ok to die in a car.
 - Needed laws in the 70s to actually push adoption.
 :::
 
-# A Short Walkthrough
+# A Short Overview 
 
 ::: notes
 10-15 minutes max
@@ -104,9 +104,11 @@ let last_name = if name == "selim" {
 
 <!-- TODO -->
 
-# Hands-On: Hello World
+# Hands-On: Rustlings 
 
-- Check out the readme in `exercises`
+## Try it out!
+
+- Check out the README in `exercises`
 - Initialise rustlings
 - Do exercise `00_intro`
 
