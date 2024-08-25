@@ -248,6 +248,22 @@ Check rustlings content for this
       }
   }
 ```
+---
+```rust
+  // Remeber our apples and oranges
+  fn buy_more(fruit: Option<u8>) -> bool {
+    match fruit {
+      None => true,
+      Some(x) => false,
+    }
+  }
+```
+
+::: notes
+matches are exhaustive
+can use wildcard catch-all pattern by defining a variable that will be used for all non-covered cases
+can use _ to do something with non-covered cases without reusing the value
+:::
 
 # Error Handling
 
@@ -258,7 +274,11 @@ all three topics, 20 minutes
 
 # Hands-On
 
-Check rustlings content for this
+Rustlings:
+
+- Enumerations -> `exercises/08_enums`, try 1 and 2
+- Pattern Matching -> `exercises/12_options`, try 2 and 3
+- Error Handling -> `exercises/13_error_handling`, start with 1
 
 ::: notes
 20 minutes
