@@ -190,6 +190,11 @@ Check rustlings content for this
   let mut current_season = Seasons::Summer;
 </code></pre>
 
+::: notes
+enums are not used to group related fields (like structs)
+enums give a way of saying that a value is one of a set of possibilities
+:::
+
 ## {data-auto-animate=true}
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
   // Enums can contain data
@@ -201,6 +206,12 @@ Check rustlings content for this
   let ipt_phone = Contact::Phone(44, 735, 27, 69)
   let ipt_email = Contact::Email(String::from("info@ipt.ch"))
 </code></pre>
+
+::: notes
+useful to concisely represent data instead of including an enum inside a struct or similar
+constructor is automatically generated for enum containing fields
+can contain any kind of data, even structs or other enums
+:::
 
 ## {data-auto-animate=true}
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
@@ -218,6 +229,12 @@ Check rustlings content for this
 }
 </code></pre>
 
+::: notes
+methods can be defined on enums
+self will be the value that the method gets called on, e.g.
+self = ipt_phone = Contact::Phone(...) above
+:::
+
 ## Rust's `Option` Enum 
 ```rust
   enum Option<T> {
@@ -228,6 +245,9 @@ Check rustlings content for this
   let apples: Option<u8> = Some(4);
   let orange: Option<u8> = None;
 ```
+::: notes
+value inside Some(T) must be of type defined with Option<T>
+:::
 
 ## Rust's `Result` Enum 
 ```rust
@@ -236,6 +256,12 @@ Check rustlings content for this
     Err(E),
   }
 ```
+::: notes
+Ok type T can (and usually is) differnt from Err type E
+Results must be used -> compiler will warn of unused/ignored Result values
+both Ok and Err variants can be () -> but does it make sense?
+:::
+
 # Pattern Matching
 ```rust
   fn real_season(season: Seasons) -> Result<Seasons, String> {
@@ -292,6 +318,12 @@ can use _ to do something with non-covered cases without reusing the value
   // Or even shorter (only if return types align)
   let only_valid = function_that_could_fail()?;
 ```
+::: notes
+when should you panic?
+-> there is no way back, program crashes
+when to use result type and unwrap?
+-> calling code has option to deal with error gracefully
+:::
 
 ## Match on Different Errors
 ```rust
@@ -314,6 +346,7 @@ can use _ to do something with non-covered cases without reusing the value
 
 ::: notes
 all three topics, 20 minutes
+unwrap_or_else() -> closure that allows a potential error to be used for further processing
 :::
 
 
