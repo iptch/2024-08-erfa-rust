@@ -267,6 +267,51 @@ can use _ to do something with non-covered cases without reusing the value
 
 # Error Handling
 
+## To Panic or Not Panic 
+```rust
+  // Unrecoverable errors use panic! macro
+  if totally_broken {
+    panic!("nothing we can do about this");
+  }
+```
+---
+```rust
+  // Recoverable errors using Result
+  let some_variable = function_that_could_fail();
+  match some_variable {
+      Ok(result) => use_result(result),
+      Err(error) => println!("this error occurred: {error:?}"),
+  }
+
+  // Shortcuts for Result type
+  let only_valid = function_that_could_fail()
+      .unwrap();
+  let only_valid = function_that_could_fail()
+      .expect("oh no something bad happened");
+
+  // Or even shorter (only if return types align)
+  let only_valid = function_that_could_fail()?;
+```
+
+## Match on Different Errors
+```rust
+  use std::fs::File;
+  use std::io::ErrorKind;
+
+  fn main() {
+    let love_letter = File::open("message_from_jakob.txt")
+      .unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+          File::create("hello_jakob.txt").unwrap_or_else(|error| {
+            panic!("Problem creating the file: {error:?}");
+        })
+      } else {
+        panic!("Problem opening the file: {error:?}");
+      }
+    });
+  }
+```
+
 ::: notes
 all three topics, 20 minutes
 :::
