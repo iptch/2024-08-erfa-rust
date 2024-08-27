@@ -173,7 +173,7 @@ Check rustlings content for this
 30 minutes
 :::
 
-# Enumerations
+# Enums
 
 ## {data-auto-animate=true}
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
@@ -274,7 +274,9 @@ both Ok and Err variants can be () -> but does it make sense?
       }
   }
 ```
+
 ---
+
 ```rust
   // Remeber our apples and oranges
   fn buy_more(fruit: Option<u8>) -> bool {
@@ -300,7 +302,9 @@ can use _ to do something with non-covered cases without reusing the value
     panic!("nothing we can do about this");
   }
 ```
+
 ---
+
 ```rust
   // Recoverable errors using Result
   let some_variable = function_that_could_fail();
