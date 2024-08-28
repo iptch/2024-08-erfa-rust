@@ -104,7 +104,7 @@ let last_name = if name == "selim" {
 
 <!-- TODO -->
 
-# Hands-On: Rustlings 
+# Hands-On: Rustlings
 
 ## Try it out!
 
@@ -121,12 +121,6 @@ let last_name = if name == "selim" {
 
 ::: notes
 30 minutes
-
-- Add slides on mutability
-- Add slides on ownership and borrowoing
-- Slices
-- Lifetimes
-- Start explaining references
 :::
 
 ## Immutability {data-auto-animate=true}
@@ -135,7 +129,7 @@ let last_name = if name == "selim" {
 fn main() {
     let x = 5;
     println!("The value of x is: {x}");
-    x = 6;
+    x = 6;      // will fail
     println!("The value of x is: {x}");
 }
 </code></pre>
@@ -185,6 +179,20 @@ println!("{}", x); // invalid
 </code></pre>
 
 ## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  fn print_hello(name: String) {
+      println!("Hello, {}!", name);
+  }
+
+  fn main() {
+      let name = String::from("Jakob");
+      print_hello(name.clone());
+      print_hello(name);
+  }
+</code></pre>
+
+## {data-auto-animate=true}
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
   fn print_hello(name: &str) {
       println!("Hello, {}!", name);
@@ -193,11 +201,18 @@ println!("{}", x); // invalid
   fn main() {
       let name = String::from("Jakob");
       print_hello(&name);
-      // can now be used here again
       print_hello(&name);
   }
 </code></pre>
 
+## Mutable Move
+
+```{.rust data-line-numbers=true}
+fn print_hello(mut name: String) {
+    name.push_str(" Beckmann");
+    println!("Hello, {}!", name);
+}
+```
 ## Lifetimes
 
 ```{.rust data-line-numbers="|2-11|4-6|8-10"}
@@ -236,7 +251,7 @@ fn main() {
 <pre data-id="code-animation"><code data-trim data-line-numbers="4|" rust>
   struct A { x: i32 }
 
-  impl A {
+  impl<'a> A {
       fn borrow(&'a self) -> &'a i32 {
           &self.x
       }
@@ -247,6 +262,11 @@ fn main() {
       println!("{}", a.borrow());
   }
 </code></pre>
+::: notes
+- lifetime parameter treated as generic definition
+- inferred with only one argument and return
+- needed with more than one argument
+:::
 
 ## {data-auto-animate=true}
 
@@ -359,7 +379,14 @@ Compiler is smart enough to figure out we don't access the reference after the l
 
 # Hands-On
 
-Check rustlings content for this
+Rustlings:
+
+- Immutability:
+  - `exercises/01_variables`, try 4 and 5
+- Ownership:
+  - `exercises/06_move_semantics`, try 2 to 5
+- Lifetimes:
+  - `exercises/16_lifetimes`, try 1 to 3
 
 ::: notes
 30 minutes
