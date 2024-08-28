@@ -129,7 +129,31 @@ let last_name = if name == "selim" {
 - Start explaining references
 :::
 
-<!-- TODO(@jakob): add slides immutability -->
+## Immutability {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|2,4" rust>
+fn main() {
+    let x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+</code></pre>
+
+## Immutability {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="2,4" rust>
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+</code></pre>
+
+::: notes
+- typing is still respected, cannot change type of variable, even with `mut`
+:::
 
 ## Everything is Owned
 
@@ -152,7 +176,7 @@ println!("{}", x); // invalid
   fn print_hello(name: String) {
       println!("Hello, {}!", name);
   }
-  
+
   fn main() {
       let name = String::from("Jakob");
       print_hello(name);
@@ -165,7 +189,7 @@ println!("{}", x); // invalid
   fn print_hello(name: &str) {
       println!("Hello, {}!", name);
   }
-  
+
   fn main() {
       let name = String::from("Jakob");
       print_hello(&name);
@@ -174,8 +198,164 @@ println!("{}", x); // invalid
   }
 </code></pre>
 
-<!-- TODO(@jakob): add slides lifetimes -->
-<!-- TODO(@jakob): add slides slices -->
+## Lifetimes
+
+```{.rust data-line-numbers="|2-11|4-6|8-10"}
+fn main() {
+    let i = 3;
+    {
+        let borrow1 = &i;
+        println!("borrow1: {}", borrow1);
+    }
+    {
+        let borrow2 = &i;
+        println!("borrow2: {}", borrow2);
+    }
+}
+```
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|4" rust>
+  struct A { x: i32 }
+
+  impl A {
+      fn borrow(&self) -> &i32 {
+          &self.x
+      }
+  }
+
+  fn main() {
+      let a = A { x: 1 };
+      println!("{}", a.borrow());
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="4|" rust>
+  struct A { x: i32 }
+
+  impl A {
+      fn borrow(&'a self) -> &'a i32 {
+          &self.x
+      }
+  }
+
+  fn main() {
+      let a = A { x: 1 };
+      println!("{}", a.borrow());
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  struct A<'a> { x: &'a i32 }
+
+  impl<'a> A<'a> {
+      fn borrow(&'a self) -> &'a i32 {
+          self.x
+      }
+  }
+
+  fn main() {
+      let x = 2;
+      let a = A { x: &x };
+      println!("{}", a.borrow());
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|13-15" rust>
+  struct A<'a> { x: &'a i32 }
+
+  impl<'a> A<'a> {
+      fn borrow(&'a self) -> &'a i32 {
+          self.x
+      }
+  }
+
+  fn main() {
+      let x = 2;
+      let a = A { x: &x };
+      {
+          let y = 3;
+          a.x = &y;
+      }
+      println!("{}", a.borrow());
+  }
+</code></pre>
+##
+
+```text
+error[E0597]: `y` does not live long enough
+  --> src/main.rs:14:15
+   |
+13 |         let y = 3;
+   |             - binding `y` declared here
+14 |         a.x = &y;
+   |               ^^ borrowed value does not live long enough
+15 |     }
+   |     - `y` dropped here while still borrowed
+16 |     println!("{}", a.borrow());
+   |                    - borrow later used here
+
+For more information about this error, try `rustc --explain E0597`.
+```
+
+::: notes
+Ending: let's get back to the code ...
+:::
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  struct A<'a> { x: &'a i32 }
+
+  impl<'a> A<'a> {
+      fn borrow(&'a self) -> &'a i32 {
+          self.x
+      }
+  }
+
+  fn main() {
+      let x = 2;
+      let a = A { x: &x };
+      {
+          let y = 3;
+          a.x = &y;
+      }
+      println!("{}", a.borrow());
+  }
+</code></pre>
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  struct A<'a> { x: &'a i32 }
+
+  impl<'a> A<'a> {
+      fn borrow(&'a self) -> &'a i32 {
+          self.x
+      }
+  }
+
+  fn main() {
+      let x = 2;
+      let a = A { x: &x };
+      {
+          let y = 3;
+          a.x = &y;
+      }
+  }
+</code></pre>
+
+::: notes
+Compiler is smart enough to figure out we don't access the reference after the lifetime
+:::
+
 
 # Hands-On
 
