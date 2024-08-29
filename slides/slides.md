@@ -587,6 +587,97 @@ Rustlings:
 
 # Traits
 
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+
+struct File {
+    // fields...
+}
+
+impl Closer for File {
+    fn close(self) -> Result<(), &'static str> {
+        Err("not implemented")
+    }
+}
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+
+struct File {
+    // fields...
+}
+
+impl Closer for File {
+    fn close(self) -> Result<(), &'static str> {
+        Err("not implemented")
+    }
+}
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+
+// you can implement traits for any type
+impl Closer for String {
+    fn close(mut self) -> Result<(), &'static str> {
+        self.clear();
+        Ok(())
+    }
+}
+</code></pre>
+
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+
+// restrict your functions to take types implementing a trait
+fn close_and_exit(c: impl Closer) {
+    let _ = c.close();
+    // exit
+}
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers="9" rust>
+// everyone has seen interfaces
+trait Closer {
+  fn close(self) -> Result<(), &'static str>;
+}
+
+// restrict your functions to take types implementing a trait
+fn close_and_exit(c: impl Closer) {
+    let _ = c.close();
+    let _ = c.close(); // what would happen here?
+    // exit
+}
+</code></pre>
+
 # Macros
 
 ::: notes
