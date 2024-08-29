@@ -426,6 +426,7 @@ $body$
   <script src="$revealjs-url$/dist/reveal.js"></script>
 
   <!-- reveal.js plugins -->
+  <script src="$revealjs-url$/plugin/markdown/markdown.js"></script>
   <script src="$revealjs-url$/plugin/notes/notes.js"></script>
   <script src="$revealjs-url$/plugin/search/search.js"></script>
   <script src="$revealjs-url$/plugin/zoom/zoom.js"></script>
@@ -441,8 +442,6 @@ $endif$
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-        view: "scroll",
-
         // Display controls in the bottom right corner
         controls: $controls$,
 
@@ -652,6 +651,7 @@ $if(highlightjs)$
           RevealHighlight,
 $endif$
           RevealNotes,
+          RevealMarkdown,
           RevealSearch,
           RevealZoom
         ]
