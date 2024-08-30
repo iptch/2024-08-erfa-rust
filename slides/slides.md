@@ -678,6 +678,28 @@ fn close_and_exit(c: impl Closer) {
 }
 </code></pre>
 
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+trait Closer {
+  // self is moved
+  fn close(self) -> Result<(), &'static str>;
+}
+
+trait TextStream {
+  // mutable borrow of self
+  fn read(&mut self) -> String;
+  // immutable borrow of self
+  fn at_end(&self) -> bool;
+}
+
+fn read_until_end(mut io: impl Closer + TextStream) {
+    while !io.at_end() {
+        let _ = io.read();
+    }
+    io.close();
+}
+</code></pre>
+
 # Macros
 
 ::: notes
