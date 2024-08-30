@@ -820,7 +820,7 @@ macro_rules! vec {
 ## `derive` macros
 
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
-se std::fmt::Debug;
+use std::fmt::Debug;
 
 #[derive(Debug)]
 struct Point {
