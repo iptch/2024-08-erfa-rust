@@ -744,6 +744,27 @@ fn read_until_end(mut io: impl Closer + TextStream) {
 }
 </code></pre>
 
+## Built-in traits
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+use std::fmt::Debug;
+
+struct Point {
+    x: u32,
+    y: u32
+}
+
+impl Debug for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        writeln!(f, "x: {:?}, y: {:?}", self.x, self.y)
+    }
+}
+
+fn main() {
+    let origin = Point{x: 0, y: 0};
+    println!("the origin is at {:?}", &origin);
+}
+</code></pre>
+
 # Macros
 
 ## {data-auto-animate=true}
@@ -791,11 +812,27 @@ fn main() {
 macro_rules! vec {
     () => { ... };
     ($elem:expr; $n:expr) => { ... };
-    // variadic argument support
+    // variadic argument support (dunno wtf this is)
     ($($x:expr),+ $(,)?) => { ... };
 }
 </code></pre>
 
+## `derive` macros
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+se std::fmt::Debug;
+
+#[derive(Debug)]
+struct Point {
+    x: u32,
+    y: u32
+}
+
+fn main() {
+    let origin = Point{x: 0, y: 0};
+    println!("the origin is at {:?}", &origin);
+}
+</code></pre>
 
 ::: notes
 20 minutes

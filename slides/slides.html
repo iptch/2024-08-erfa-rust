@@ -1088,6 +1088,28 @@ fn read_until_end(mut io: impl Closer + TextStream) {
     io.close();
 }
 </code></pre>
+</section>
+<section id="built-in-traits" class="slide level2">
+<h2>Built-in traits</h2>
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+use std::fmt::Debug;
+
+struct Point {
+    x: u32,
+    y: u32
+}
+
+impl Debug for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        writeln!(f, "x: {:?}, y: {:?}", self.x, self.y)
+    }
+}
+
+fn main() {
+    let origin = Point{x: 0, y: 0};
+    println!("the origin is at {:?}", &origin);
+}
+</code></pre>
 </section></section>
 <section>
 <section id="macros" class="title-slide slide level1">
@@ -1141,8 +1163,25 @@ fn main() {
 macro_rules! vec {
     () => { ... };
     ($elem:expr; $n:expr) => { ... };
-    // variadic argument support
+    // variadic argument support (dunno wtf this is)
     ($($x:expr),+ $(,)?) => { ... };
+}
+</code></pre>
+</section>
+<section id="derive-macros" class="slide level2">
+<h2><code>derive</code> macros</h2>
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+se std::fmt::Debug;
+
+#[derive(Debug)]
+struct Point {
+    x: u32,
+    y: u32
+}
+
+fn main() {
+    let origin = Point{x: 0, y: 0};
+    println!("the origin is at {:?}", &origin);
 }
 </code></pre>
 <aside class="notes">
