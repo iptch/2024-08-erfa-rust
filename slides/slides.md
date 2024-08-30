@@ -100,9 +100,6 @@ let last_name = if name == "selim" {
     "who cares"
 };
 ```
-## Project Structure
-
-<!-- TODO -->
 
 # Hands-On: Rustlings
 
@@ -307,6 +304,7 @@ fn main() {
       println!("{}", a.borrow());
   }
 </code></pre>
+
 ##
 
 ```text
@@ -395,7 +393,7 @@ Rustlings:
 # Enums
 
 ## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+```rust
   // Simple enum 
   enum Seasons {
     Winter,
@@ -407,14 +405,14 @@ Rustlings:
 
   let favorite_season = Seasons::Winter;
   let mut current_season = Seasons::Summer;
-</code></pre>
-
+```
 ::: notes
 enums are not used to group related fields (like structs)
 enums give a way of saying that a value is one of a set of possibilities
 :::
 
 ## {data-auto-animate=true}
+
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
   // Enums can contain data
   enum Contact{
@@ -422,8 +420,8 @@ enums give a way of saying that a value is one of a set of possibilities
     Email(String),
   }
 
-  let ipt_phone = Contact::Phone(44, 735, 27, 69)
-  let ipt_email = Contact::Email(String::from("info@ipt.ch"))
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
 </code></pre>
 
 ::: notes
@@ -433,7 +431,42 @@ can contain any kind of data, even structs or other enums
 :::
 
 ## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|10" rust>
+  // Enums can contain data
+  enum Contact{
+    Phone(u16, u16, u16, u16),
+    Email(String),
+  }
+
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
+
+  ipt_phone.contact();
+</code></pre>
+
+## 
+
+```text
+error[E0599]: no method named `contact` found for enum `Contact` in the current scope
+  --> src/main.rs:13:13
+   |
+2  |   enum Contact{
+   |   ------------ method `contact` not found for this enum
+...
+13 |   ipt_phone.contact();
+   |             ^^^^^^^ method not found in `Contact`
+```
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|7-15" rust>
+  // Enums can contain data
+  enum Contact{
+    Phone(u16, u16, u16, u16),
+    Email(String),
+  }
+
   // Enums can implement methods
   impl Contact{
     fn contact(&self) {
@@ -444,8 +477,10 @@ can contain any kind of data, even structs or other enums
     }
   }
 
-  ipt_phone.contact(); // Output: writing to info@ipt.ch ...
-}
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
+
+  ipt_phone.contact(); 
 </code></pre>
 
 ::: notes
@@ -453,6 +488,12 @@ methods can be defined on enums
 self will be the value that the method gets called on, e.g.
 self = ipt_phone = Contact::Phone(...) above
 :::
+
+##
+
+```text
+dialling 44-735-27-69 ...
+```
 
 ## Rust's `Option` Enum 
 ```rust
@@ -482,6 +523,8 @@ both Ok and Err variants can be () -> but does it make sense?
 :::
 
 # Pattern Matching
+
+## 
 ```rust
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
@@ -494,10 +537,19 @@ both Ok and Err variants can be () -> but does it make sense?
   }
 ```
 
----
+## 
+```rust 
+  fn real_season(season: Seasons) -> Result<Seasons, String> {
+      match season {
+          other => Ok(other),
+          Seasons::Bulk => Err("I am not so sure about that...".to_string()),
+      }
+  }
+```
 
+## 
 ```rust
-  // Remeber our apples and oranges
+  // Remember our apples and oranges
   fn buy_more(fruit: Option<u8>) -> bool {
     match fruit {
       None => true,
@@ -522,8 +574,7 @@ can use _ to do something with non-covered cases without reusing the value
   }
 ```
 
----
-
+##
 ```rust
   // Recoverable errors using Result
   let some_variable = function_that_could_fail();
@@ -549,21 +600,23 @@ when to use result type and unwrap?
 :::
 
 ## Match on Different Errors
+
 ```rust
   use std::fs::File;
-  use std::io::ErrorKind;
 
-  fn main() {
-    let love_letter = File::open("message_from_jakob.txt")
-      .unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-          File::create("hello_jakob.txt").unwrap_or_else(|error| {
-            panic!("Problem creating the file: {error:?}");
-        })
-      } else {
-        panic!("Problem opening the file: {error:?}");
-      }
-    });
+  fn read_tweet(source_path: &str, buffer: &mut [u8]) -> usize {
+    let tweet = File::open(source_path);
+
+    match tweet.unwrap() {
+      Ok(file) => {
+        let bytes_read = file.read(&mut buffer);
+        match bytes_read.unwrap() {
+          Ok(number_of_bytes) => number_of_bytes,
+          Err(err) => panic!("Failed to read the tweet: {err:?}"),
+        },
+      },
+      Err(err) => panic!("Failed to open the tweet: {err:?}"),
+    }
   }
 ```
 
