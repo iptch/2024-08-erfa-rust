@@ -545,7 +545,7 @@ fn real_season(season: Seasons) -> Result<Seasons, String> {
 ```
 
 ## 
-```rust 
+```{.rust data-line-numbers=true}
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
           other => Ok(other),
@@ -555,7 +555,7 @@ fn real_season(season: Seasons) -> Result<Seasons, String> {
 ```
 
 ## 
-```rust
+```{.rust data-line-numbers=true}
   // Remember our apples and oranges
   fn buy_more(fruit: Option<u8>) -> bool {
     match fruit {
