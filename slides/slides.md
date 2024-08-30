@@ -420,7 +420,7 @@ let mut current_season = Seasons::Summer;
   enum Contact{
     Phone(u16, u16, u16, u16),
     Email(String),
-}
+  }
 
   let ipt_phone = Contact::Phone(44, 735, 27, 69);
   let ipt_email = Contact::Email(String::from("info@ipt.ch"));
@@ -593,10 +593,9 @@ match some_variable {
 }
 
 // Shortcuts for Result type
+let only_valid = function_that_could_fail().unwrap();
 let only_valid = function_that_could_fail()
-     .unwrap();
-let only_valid = function_that_could_fail()
-     .expect("oh no something bad happened");
+    .expect("oh no something bad happened");
 
 // Or even shorter (only if return types align)
 let only_valid = function_that_could_fail()?;
