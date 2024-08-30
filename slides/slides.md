@@ -555,7 +555,7 @@ both Ok and Err variants can be () -> but does it make sense?
 ## 
 
 ```rust
-  // Remeber our apples and oranges
+  // Remember our apples and oranges
   fn buy_more(fruit: Option<u8>) -> bool {
     match fruit {
       None => true,
@@ -620,10 +620,10 @@ when to use result type and unwrap?
         let bytes_read = file.read(&mut buffer);
         match bytes_read.unwrap() {
           Ok(number_of_bytes) => number_of_bytes,
-          Err(err) => panic!("Failed to read the love letter: {err:?}"),
+          Err(err) => panic!("Failed to read the tweet: {err:?}"),
         },
       },
-      Err(err) => panic!("Failed to open the love letter: {err:?}"),
+      Err(err) => panic!("Failed to open the tweet: {err:?}"),
     }
   }
 ```
