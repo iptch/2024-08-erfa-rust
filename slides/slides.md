@@ -684,24 +684,6 @@ trait Closer {
   fn close(self) -> Result<(), &'static str>;
 }
 
-struct File {
-    // fields...
-}
-
-impl Closer for File {
-    fn close(self) -> Result<(), &'static str> {
-        Err("not implemented")
-    }
-}
-</code></pre>
-
-## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
-// everyone has seen interfaces
-trait Closer {
-  fn close(self) -> Result<(), &'static str>;
-}
-
 // you can implement traits for any type
 impl Closer for String {
     fn close(mut self) -> Result<(), &'static str> {
@@ -772,7 +754,7 @@ fn read_until_end(mut io: impl Closer + TextStream) {
 
 # Hands-On
 
-Check rustlings content for this
+- `exercises/15_traits/` 1, 2, 4, 5
 
 ::: notes
 20 minutes
