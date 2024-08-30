@@ -481,7 +481,6 @@ error[E0599]: no method named `contact` found for enum `Contact` in the current 
   let ipt_email = Contact::Email(String::from("info@ipt.ch"));
 
   ipt_phone.contact(); 
-}
 </code></pre>
 
 ::: notes
@@ -497,7 +496,6 @@ dialling 44-735-27-69 ...
 ```
 
 ## Rust's `Option` Enum 
-
 ```rust
   enum Option<T> {
     None,
@@ -512,7 +510,6 @@ value inside Some(T) must be of type defined with Option<T>
 :::
 
 ## Rust's `Result` Enum 
-
 ```rust
   enum Result<T, E> {
     Ok(T),
@@ -528,7 +525,6 @@ both Ok and Err variants can be () -> but does it make sense?
 # Pattern Matching
 
 ## 
-
 ```rust
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
@@ -542,7 +538,6 @@ both Ok and Err variants can be () -> but does it make sense?
 ```
 
 ## 
-
 ```rust 
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
@@ -553,7 +548,6 @@ both Ok and Err variants can be () -> but does it make sense?
 ```
 
 ## 
-
 ```rust
   // Remember our apples and oranges
   fn buy_more(fruit: Option<u8>) -> bool {
@@ -573,7 +567,6 @@ can use _ to do something with non-covered cases without reusing the value
 # Error Handling
 
 ## To Panic or Not Panic 
-
 ```rust
   // Unrecoverable errors use panic! macro
   if totally_broken {
@@ -581,8 +574,7 @@ can use _ to do something with non-covered cases without reusing the value
   }
 ```
 
----
-
+##
 ```rust
   // Recoverable errors using Result
   let some_variable = function_that_could_fail();
