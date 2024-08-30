@@ -394,37 +394,39 @@ Rustlings:
 
 # Enums
 
-## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
-  // Simple enum 
-  enum Seasons {
+##
+
+```{.rust data-line-numbers=true}
+// Simple enum 
+enum Seasons {
     Winter,
     Spring,
     Summer,
     Autumn,
     Bulk,
-  }
+}
 
-  let favorite_season = Seasons::Winter;
-  let mut current_season = Seasons::Summer;
-</code></pre>
+let favorite_season = Seasons::Winter;
+let mut current_season = Seasons::Summer;
+```
 
 ::: notes
-enums are not used to group related fields (like structs)
-enums give a way of saying that a value is one of a set of possibilities
+- enums are not used to group related fields (like structs)
+- enums give a way of saying that a value is one of a set of possibilities
 :::
 
-## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
-  // Enums can contain data
-  enum Contact{
+##
+
+```{.rust data-line-numbers=true}
+// Enums can contain data
+enum Contact{
     Phone(u16, u16, u16, u16),
     Email(String),
-  }
+}
 
-  let ipt_phone = Contact::Phone(44, 735, 27, 69)
-  let ipt_email = Contact::Email(String::from("info@ipt.ch"))
-</code></pre>
+let ipt_phone = Contact::Phone(44, 735, 27, 69)
+let ipt_email = Contact::Email(String::from("info@ipt.ch"))
+```
 
 ::: notes
 useful to concisely represent data instead of including an enum inside a struct or similar
@@ -432,21 +434,25 @@ constructor is automatically generated for enum containing fields
 can contain any kind of data, even structs or other enums
 :::
 
-## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
-  // Enums can implement methods
-  impl Contact{
-    fn contact(&self) {
-      match self {
-        Contact::Phone(a, b, c, d) => println!("dialling {}-{}-{}-{} ...", a, b, c, d),
-        Contact::Email(address) => println!("writing to {} ...", address),
-      }
+##
+
+```{.rust data-line-numbers=true}
+// Enums can implement methods
+impl Contact{
+  fn contact(&self) {
+    match self {
+      Contact::Phone(a, b, c, d) => {
+        println!("dialling {}-{}-{}-{} ...", a, b, c, d);
+      },
+      Contact::Email(address) => {
+        println!("writing to {} ...", address);
+      },
     }
   }
-
-  ipt_phone.contact(); // Output: writing to info@ipt.ch ...
 }
-</code></pre>
+
+ipt_phone.contact(); // Output: writing to info@ipt.ch ...
+```
 
 ::: notes
 methods can be defined on enums
@@ -455,26 +461,30 @@ self = ipt_phone = Contact::Phone(...) above
 :::
 
 ## Rust's `Option` Enum 
-```rust
-  enum Option<T> {
+
+```{.rust data-line-numbers=true}
+enum Option<T> {
     None,
     Some(T),
-  }
+}
 
-  let apples: Option<u8> = Some(4);
-  let orange: Option<u8> = None;
+let apples: Option<u8> = Some(4);
+let orange: Option<u8> = None;
 ```
+
 ::: notes
 value inside Some(T) must be of type defined with Option<T>
 :::
 
 ## Rust's `Result` Enum 
-```rust
-  enum Result<T, E> {
+
+```{.rust data-line-numbers=true}
+enum Result<T, E> {
     Ok(T),
     Err(E),
-  }
+}
 ```
+
 ::: notes
 Ok type T can (and usually is) differnt from Err type E
 Results must be used -> compiler will warn of unused/ignored Result values
@@ -482,28 +492,31 @@ both Ok and Err variants can be () -> but does it make sense?
 :::
 
 # Pattern Matching
-```rust
-  fn real_season(season: Seasons) -> Result<Seasons, String> {
-      match season {
+
+##
+
+```{.rust data-line-numbers=true}
+fn real_season(season: Seasons) -> Result<Seasons, String> {
+     match season {
           Seasons::Winter => Ok(season),
           Seasons::Spring => Ok(season),
           Seasons::Summer => Ok(season),
           Seasons::Autumn => Ok(season),
           Seasons::Bulk => Err("I am not so sure about that...".to_string()),
-      }
-  }
+     }
+}
 ```
 
 ---
 
-```rust
-  // Remeber our apples and oranges
-  fn buy_more(fruit: Option<u8>) -> bool {
-    match fruit {
-      None => true,
-      Some(x) => false,
-    }
-  }
+```{.rust data-line-numbers=true}
+// Remeber our apples and oranges
+fn buy_more(fruit: Option<u8>) -> bool {
+     match fruit {
+          None => true,
+          Some(x) => false,
+     }
+}
 ```
 
 ::: notes
@@ -515,32 +528,34 @@ can use _ to do something with non-covered cases without reusing the value
 # Error Handling
 
 ## To Panic or Not Panic 
-```rust
-  // Unrecoverable errors use panic! macro
-  if totally_broken {
+
+```{.rust data-line-numbers=true}
+// Unrecoverable errors use panic! macro
+if totally_broken {
     panic!("nothing we can do about this");
-  }
+}
 ```
 
 ---
 
-```rust
-  // Recoverable errors using Result
-  let some_variable = function_that_could_fail();
-  match some_variable {
-      Ok(result) => use_result(result),
-      Err(error) => println!("this error occurred: {error:?}"),
-  }
+```{.rust data-line-numbers=true}
+// Recoverable errors using Result
+let some_variable = function_that_could_fail();
+match some_variable {
+     Ok(result) => use_result(result),
+     Err(error) => println!("this error occurred: {error:?}"),
+}
 
-  // Shortcuts for Result type
-  let only_valid = function_that_could_fail()
-      .unwrap();
-  let only_valid = function_that_could_fail()
-      .expect("oh no something bad happened");
+// Shortcuts for Result type
+let only_valid = function_that_could_fail()
+     .unwrap();
+let only_valid = function_that_could_fail()
+     .expect("oh no something bad happened");
 
-  // Or even shorter (only if return types align)
-  let only_valid = function_that_could_fail()?;
+// Or even shorter (only if return types align)
+let only_valid = function_that_could_fail()?;
 ```
+
 ::: notes
 when should you panic?
 -> there is no way back, program crashes
@@ -549,22 +564,23 @@ when to use result type and unwrap?
 :::
 
 ## Match on Different Errors
-```rust
-  use std::fs::File;
-  use std::io::ErrorKind;
 
-  fn main() {
-    let love_letter = File::open("message_from_jakob.txt")
-      .unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-          File::create("hello_jakob.txt").unwrap_or_else(|error| {
-            panic!("Problem creating the file: {error:?}");
-        })
-      } else {
-        panic!("Problem opening the file: {error:?}");
-      }
-    });
-  }
+```{.rust data-line-numbers=true}
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+  let love_letter = File::open("message_from_jakob.txt")
+    .unwrap_or_else(|error| {
+      if error.kind() == ErrorKind::NotFound {
+        File::create("hello_jakob.txt").unwrap_or_else(|error| {
+          panic!("Problem creating the file: {error:?}");
+      })
+    } else {
+      panic!("Problem opening the file: {error:?}");
+    }
+  });
+}
 ```
 
 ::: notes
