@@ -5,5 +5,3 @@ debug/
 .devbox/
 /exercises/.rustup
 /exercises/rustlings
-/slides/slides.html
-/slides/pd-images/
