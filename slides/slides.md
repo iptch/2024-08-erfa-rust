@@ -307,6 +307,7 @@ fn main() {
       println!("{}", a.borrow());
   }
 </code></pre>
+
 ##
 
 ```text
@@ -395,7 +396,7 @@ Rustlings:
 # Enums
 
 ## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+```rust
   // Simple enum 
   enum Seasons {
     Winter,
@@ -407,14 +408,14 @@ Rustlings:
 
   let favorite_season = Seasons::Winter;
   let mut current_season = Seasons::Summer;
-</code></pre>
-
+```
 ::: notes
 enums are not used to group related fields (like structs)
 enums give a way of saying that a value is one of a set of possibilities
 :::
 
 ## {data-auto-animate=true}
+
 <pre data-id="code-animation"><code data-trim data-line-numbers rust>
   // Enums can contain data
   enum Contact{
@@ -422,8 +423,8 @@ enums give a way of saying that a value is one of a set of possibilities
     Email(String),
   }
 
-  let ipt_phone = Contact::Phone(44, 735, 27, 69)
-  let ipt_email = Contact::Email(String::from("info@ipt.ch"))
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
 </code></pre>
 
 ::: notes
@@ -433,7 +434,42 @@ can contain any kind of data, even structs or other enums
 :::
 
 ## {data-auto-animate=true}
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|10" rust>
+  // Enums can contain data
+  enum Contact{
+    Phone(u16, u16, u16, u16),
+    Email(String),
+  }
+
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
+
+  ipt_phone.contact();
+</code></pre>
+
+## 
+
+```text
+error[E0599]: no method named `contact` found for enum `Contact` in the current scope
+  --> src/main.rs:13:13
+   |
+2  |   enum Contact{
+   |   ------------ method `contact` not found for this enum
+...
+13 |   ipt_phone.contact();
+   |             ^^^^^^^ method not found in `Contact`
+```
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers="|7-15" rust>
+  // Enums can contain data
+  enum Contact{
+    Phone(u16, u16, u16, u16),
+    Email(String),
+  }
+
   // Enums can implement methods
   impl Contact{
     fn contact(&self) {
@@ -444,7 +480,10 @@ can contain any kind of data, even structs or other enums
     }
   }
 
-  ipt_phone.contact(); // Output: writing to info@ipt.ch ...
+  let ipt_phone = Contact::Phone(44, 735, 27, 69);
+  let ipt_email = Contact::Email(String::from("info@ipt.ch"));
+
+  ipt_phone.contact(); 
 }
 </code></pre>
 
@@ -454,7 +493,14 @@ self will be the value that the method gets called on, e.g.
 self = ipt_phone = Contact::Phone(...) above
 :::
 
+##
+
+```text
+dialling 44-735-27-69 ...
+```
+
 ## Rust's `Option` Enum 
+
 ```rust
   enum Option<T> {
     None,
@@ -469,6 +515,7 @@ value inside Some(T) must be of type defined with Option<T>
 :::
 
 ## Rust's `Result` Enum 
+
 ```rust
   enum Result<T, E> {
     Ok(T),
@@ -482,7 +529,10 @@ both Ok and Err variants can be () -> but does it make sense?
 :::
 
 # Pattern Matching
-```rust
+
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
           Seasons::Winter => Ok(season),
@@ -492,9 +542,20 @@ both Ok and Err variants can be () -> but does it make sense?
           Seasons::Bulk => Err("I am not so sure about that...".to_string()),
       }
   }
-```
+</code></pre>
 
----
+## {data-auto-animate=true}
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+  fn real_season(season: Seasons) -> Result<Seasons, String> {
+      match season {
+          other => Ok(other),
+          Seasons::Bulk => Err("I am not so sure about that...".to_string()),
+      }
+  }
+</code></pre>
+
+## 
 
 ```rust
   // Remeber our apples and oranges
@@ -515,6 +576,7 @@ can use _ to do something with non-covered cases without reusing the value
 # Error Handling
 
 ## To Panic or Not Panic 
+
 ```rust
   // Unrecoverable errors use panic! macro
   if totally_broken {
@@ -549,6 +611,9 @@ when to use result type and unwrap?
 :::
 
 ## Match on Different Errors
+
+<--- TODO ---> 
+
 ```rust
   use std::fs::File;
   use std::io::ErrorKind;
