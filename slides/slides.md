@@ -747,6 +747,57 @@ fn read_until_end(mut io: impl Closer + TextStream) {
 
 # Macros
 
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// define a new macro with "macro_rules!"
+macro_rules! say_hello {
+    // the macro takes no argument
+    () => {
+        // the macro will expand into the contents of this block
+        println!("Hello!")
+    };
+}
+
+fn main() {
+    // This call will expand into `println!("Hello!")`
+    say_hello!();
+}
+</code></pre>
+
+## {data-auto-animate=true}
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+// define a new macro with "macro_rules!"
+macro_rules! say_hello {
+    // the macro takes no argument
+    () => {
+        // the macro will expand into the contents of this block
+        println!("Hello!")
+    };
+    ($expression:expr) => {
+        println!("Hello, {}!", $expression)
+    };
+}
+
+fn main() {
+    // This call will expand into `println!("Hello!")`
+    say_hello!();
+    // This call will expand into `println!("Hello, {}!", "world")`
+    say_hello!("world");
+}
+</code></pre>
+
+## the `vec!` macro
+
+<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+macro_rules! vec {
+    () => { ... };
+    ($elem:expr; $n:expr) => { ... };
+    // variadic argument support
+    ($($x:expr),+ $(,)?) => { ... };
+}
+</code></pre>
+
+
 ::: notes
 20 minutes
 :::
