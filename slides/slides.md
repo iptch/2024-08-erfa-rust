@@ -530,9 +530,9 @@ both Ok and Err variants can be () -> but does it make sense?
 
 # Pattern Matching
 
-## {data-auto-animate=true}
+## 
 
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+```rust
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
           Seasons::Winter => Ok(season),
@@ -542,18 +542,18 @@ both Ok and Err variants can be () -> but does it make sense?
           Seasons::Bulk => Err("I am not so sure about that...".to_string()),
       }
   }
-</code></pre>
+```
 
-## {data-auto-animate=true}
+## 
 
-<pre data-id="code-animation"><code data-trim data-line-numbers rust>
+```rust 
   fn real_season(season: Seasons) -> Result<Seasons, String> {
       match season {
           other => Ok(other),
           Seasons::Bulk => Err("I am not so sure about that...".to_string()),
       }
   }
-</code></pre>
+```
 
 ## 
 
@@ -612,23 +612,22 @@ when to use result type and unwrap?
 
 ## Match on Different Errors
 
-<--- TODO ---> 
-
 ```rust
   use std::fs::File;
-  use std::io::ErrorKind;
 
-  fn main() {
-    let love_letter = File::open("message_from_jakob.txt")
-      .unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-          File::create("hello_jakob.txt").unwrap_or_else(|error| {
-            panic!("Problem creating the file: {error:?}");
-        })
-      } else {
-        panic!("Problem opening the file: {error:?}");
-      }
-    });
+  fn read_tweet(source_path: &str, buffer: &mut [u8]) -> usize {
+    let tweet = File::open(source_path);
+
+    match tweet.unwrap() {
+      Ok(file) => {
+        let bytes_read = file.read(&mut buffer);
+        match bytes_read.unwrap() {
+          Ok(number_of_bytes) => number_of_bytes,
+          Err(err) => panic!("Failed to read the love letter: {err:?}"),
+        },
+      },
+      Err(err) => panic!("Failed to open the love letter: {err:?}"),
+    }
   }
 ```
 
