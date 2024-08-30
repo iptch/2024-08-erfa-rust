@@ -806,6 +806,7 @@ macro_rules! vec {
 # Hands-On
 
 - `exercises/15_traits/` 1, 2, 4, 5
+- `exercises/21_macros/` 1, 2, 4
 
 ::: notes
 20 minutes
