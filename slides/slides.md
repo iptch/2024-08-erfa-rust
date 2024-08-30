@@ -616,10 +616,10 @@ when to use result type and unwrap?
   fn read_tweet(source_path: &str, buffer: &mut [u8]) -> usize {
     let tweet = File::open(source_path);
 
-    match tweet.unwrap() {
+    match tweet {
       Ok(file) => {
         let bytes_read = file.read(&mut buffer);
-        match bytes_read.unwrap() {
+        match bytes_read {
           Ok(number_of_bytes) => number_of_bytes,
           Err(err) => panic!("Failed to read the tweet: {err:?}"),
         },
