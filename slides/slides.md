@@ -100,9 +100,6 @@ let last_name = if name == "selim" {
     "who cares"
 };
 ```
-## Project Structure
-
-<!-- TODO -->
 
 # Hands-On: Rustlings
 
